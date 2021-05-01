@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "/Users/Rashid/Documents/AaP/GeekBrains Cources/12. Клиент-серверные приложения на Python/venv/bin/python",
+    "python.languageServer": "Pylance",
+    "python.experiments.optOutFrom": [
+        "All"
+    ],
+    "editor.fontFamily": "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 15,
+    "terminal.integrated.fontSize": 14,
+}
