@@ -1,0 +1,52 @@
+import pickle
+from datetime import datetime
+from socket import AF_INET, SOCK_STREAM, socket
+
+""" Server """
+
+host = "localhost"
+port = 7779
+
+s_serv = socket(AF_INET, SOCK_STREAM)
+s_serv.bind((host, port))
+s_serv.listen(1)
+
+TIME = datetime.now().replace(microsecond=0).isoformat(sep=" ")
+
+
+def respond_presence_msg(sender):
+
+    """Responding client's presence message"""
+
+    presence_msg_response = {
+        "response": 200,
+        "alert": f"Hi there, {data['user']}!",
+    }
+    return sender.send(pickle.dumps(presence_msg_response))
+
+
+def respond_msg(sender):
+
+    msg_responce = {
+        "response": 200,
+        "alert": f"I've got your message: '{data['message']}'",
+    }
+
+    return sender.send(pickle.dumps(msg_responce))
+
+
+if __name__ == "__main__":
+
+    while True:
+        client, addr = s_serv.accept()
+
+        data = pickle.loads(client.recv(1024))
+
+        if data["action"] == "presence":
+            respond_presence_msg(client)
+            print(data)
+        elif data["action"] == "msg":
+            respond_msg(client)
+            print(data)
+
+        client.close()
