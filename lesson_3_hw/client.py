@@ -1,9 +1,21 @@
+import logging
 import pickle
 import threading
 from datetime import datetime
 from socket import AF_INET, SOCK_STREAM, socket
+import sys
+import os
+
+sys.path.append(
+    os.path.abspath(
+        "/Users/Rashid/Documents/AaP/GeekBrains Cources/12. Клиент-серверные приложения на Python/client_server_apps/lesson_5_hw/log"
+    )
+)
+import client_log_config
 
 """ Client """
+
+logger = logging.getLogger("client_log")
 
 host = "localhost"
 port = 7779
@@ -22,12 +34,14 @@ def handle_messages():
 
             if data:
                 print(f"Response from server: {pickle.loads(data)}")
+                logger.info(f"Response from server: {pickle.loads(data)}")
             else:
                 s_cl.close()
                 break
 
         except Exception as e:
             print(f"Error handling message from server: {e}")
+            logger.error(e)
             s_cl.close()
             break
 
@@ -62,6 +76,7 @@ def send_msg():
 
 
 if __name__ == "__main__":
+    logger.debug("App started")
 
     account_name = input("Enter your name here: ")
 
