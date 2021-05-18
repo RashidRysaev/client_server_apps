@@ -1,8 +1,21 @@
+import logging
 import pickle
 from datetime import datetime
 from socket import AF_INET, SOCK_STREAM, socket
+import sys
+import os
+
+sys.path.append(
+    os.path.abspath(
+        "/Users/Rashid/Documents/AaP/GeekBrains Cources/12. Клиент-серверные приложения на Python/client_server_apps/lesson_5_hw/log"
+    )
+)
+import server_log_config
+
 
 """ Server """
+
+logger = logging.getLogger("server_log")
 
 host = "localhost"
 port = 7779
@@ -45,8 +58,10 @@ if __name__ == "__main__":
         if data["action"] == "presence":
             respond_presence_msg(client)
             print(data)
+            logger.info()
         elif data["action"] == "msg":
             respond_msg(client)
             print(data)
+            logger.info()
 
         client.close()
