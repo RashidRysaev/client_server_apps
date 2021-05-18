@@ -4,6 +4,7 @@ from datetime import datetime
 from socket import AF_INET, SOCK_STREAM, socket
 import sys
 import os
+from lesson_6_hw.decs import log
 
 sys.path.append(
     os.path.abspath(
@@ -27,6 +28,7 @@ s_serv.listen(1)
 TIME = datetime.now().replace(microsecond=0).isoformat(sep=" ")
 
 
+@log
 def respond_presence_msg(sender):
 
     """Responding client's presence message"""
@@ -38,6 +40,7 @@ def respond_presence_msg(sender):
     return sender.send(pickle.dumps(presence_msg_response))
 
 
+@log
 def respond_msg(sender):
 
     msg_responce = {

@@ -26,6 +26,7 @@ s_cl.connect((host, port))
 TIME = datetime.now().replace(microsecond=0).isoformat(sep=" ")
 
 
+@log
 def handle_messages():
 
     while True:
@@ -46,6 +47,7 @@ def handle_messages():
             break
 
 
+@log
 def send_presence_msg():
 
     """Sending presence message to the server"""
@@ -60,6 +62,7 @@ def send_presence_msg():
     return s_cl.send(pickle.dumps(presence))
 
 
+@log
 def send_msg():
 
     """Sending a message to the server"""
